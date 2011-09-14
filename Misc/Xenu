@@ -1,0 +1,35 @@
+ // Print out some debug info...
+    printf("XENU Development build version %i\n", XENU_VERSION);
+    
+    // Get a list of all available devices
+    vector<string> allDevices = DeviceManager::GetDevices();
+    
+    // Get the root path to the first available device
+    string deviceRootPath = DeviceManager::GetDeviceRootPath(allDevices.front());
+    
+    // Create a path to the applications directory
+    string applicationsPath = deviceRootPath + "Applications";
+    
+    // Get a list of all applications
+    vector<LibXenonApplication> applications = LibXenonApplicationManager::GetApplications(applicationsPath);
+    
+    printf("Got list of applications\n");
+    
+    // Print them to the screen
+    for(vector<LibXenonApplication>::iterator iter = applications.begin(); iter != applications.end(); ++iter) {
+        
+        printf("Found %s at path %s\n", (LibXenonApplication(*iter)).Name.c_str(), (LibXenonApplication(*iter)).ExecutablePath.c_str());
+    }
+    
+    // Keep the application alive
+    printf("Nothing more to do, sleeping.\n");
+    
+    // Output system temperatures...
+    float cpu = 0, gpu = 0, memory = 0, motherboard = 0;
+    
+    while(true) {
+
+        HardwareManager::GetSystemTemperatures(&cpu, &gpu, &memory, &motherboard);
+
+        printf("CPU = %4.2f C GPU = %4.2f C MEM = %4.2f C Mobo = %4.2f C\r", cpu, gpu, memory, motherboard);
+    }
