@@ -11,6 +11,7 @@ GUIManager.o: /home/tyler/Development/Xenu/source/GUIManager.cpp \
  /home/tyler/Development/Xenu/source/GUIApplicationPanel.h \
  /home/tyler/Development/Xenu/source/LibXenonApplication.h \
  /home/tyler/Development/Xenu/source/HardwareManager.h \
+ /home/tyler/Development/Xenu/source/ThemeManager.h \
  /home/tyler/Development/Xenu/source/LogManager.h \
  /home/tyler/Development/Xenu/source/Verdana_16_abc.h \
  /home/tyler/Development/Xenu/source/Verdana_16_png.h \
@@ -39,6 +40,8 @@ GUIManager.o: /home/tyler/Development/Xenu/source/GUIManager.cpp \
 /home/tyler/Development/Xenu/source/LibXenonApplication.h:
 
 /home/tyler/Development/Xenu/source/HardwareManager.h:
+
+/home/tyler/Development/Xenu/source/ThemeManager.h:
 
 /home/tyler/Development/Xenu/source/LogManager.h:
 

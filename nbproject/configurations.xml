@@ -1684,8 +1684,13 @@
       </df>
     </df>
     <df name="Xenu" root=".">
+      <df name=".git">
+        <df name="logs">
+        </df>
+      </df>
       <df name="build">
         <in>DeviceManager.d</in>
+        <in>FileManager.d</in>
       </df>
       <df name="Misc">
       </df>
@@ -1706,6 +1711,8 @@
         <in>LibXenonApplicationManager.h</in>
         <in>LogManager.cpp</in>
         <in>LogManager.h</in>
+        <in>ThemeManager.cpp</in>
+        <in>ThemeManager.h</in>
         <in>Verdana_16_abc.h</in>
         <in>Verdana_16_png.h</in>
         <in>main.cpp</in>
