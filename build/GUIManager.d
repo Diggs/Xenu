@@ -15,7 +15,9 @@ GUIManager.o: /home/tyler/Development/Xenu/source/GUIManager.cpp \
  /home/tyler/Development/Xenu/source/LogManager.h \
  /home/tyler/Development/Xenu/source/Verdana_16_abc.h \
  /home/tyler/Development/Xenu/source/Verdana_16_png.h \
- /usr/local/xenon/usr/include/zlx/Utils.h
+ /usr/local/xenon/usr/include/time/time.h \
+ /usr/local/xenon/usr/include/zlx/Utils.h \
+ /usr/local/xenon/usr/include/zlx/Draw.h
 
 /home/tyler/Development/Xenu/source/GUIManager.h:
 
@@ -49,4 +51,8 @@ GUIManager.o: /home/tyler/Development/Xenu/source/GUIManager.cpp \
 
 /home/tyler/Development/Xenu/source/Verdana_16_png.h:
 
+/usr/local/xenon/usr/include/time/time.h:
+
 /usr/local/xenon/usr/include/zlx/Utils.h:
+
+/usr/local/xenon/usr/include/zlx/Draw.h:

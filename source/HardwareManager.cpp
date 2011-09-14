@@ -36,7 +36,7 @@ void HardwareManager::InitializeXbox(bool enableConsole)
     if(initialized == 1) return;
     
     // Initialize the display
-    xenos_init(VIDEO_MODE_AUTO);
+    //xenos_init(VIDEO_MODE_AUTO);
     
     // Make sure all CPU cores are at full speed
     xenon_make_it_faster(XENON_SPEED_FULL);

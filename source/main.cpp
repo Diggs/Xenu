@@ -52,17 +52,12 @@ void update()
 {
     //struct controller_data_s xboxController = updateInput();
 
-    LogManager::Log("Running main loop update()\n");
-    
     gui.update();
 }
 
 
 void draw()
-{
-    
-    LogManager::Log("Running main loop draw()\n");
-    
+{    
     gui.draw();
 }
 
@@ -74,12 +69,9 @@ int main()
     
     gui.initialize();
     
-    LogManager::Log("Xbox Hardware initialized, running main loop.\n");
     
     // Run the main loop
     while(!shouldQuit) {
-
-        LogManager::Log("Running main loop.\n");
         
         update();
 
