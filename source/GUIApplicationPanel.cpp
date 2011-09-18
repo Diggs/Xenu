@@ -37,5 +37,5 @@ void GUIApplicationPanel::update(float x, float y)
     
 void GUIApplicationPanel::draw()
 {
-    Draw::DrawColoredRect(_x, _y, 0.5, 0.5, ThemeManager::GetPanelColor());
+    Draw::DrawColoredRect(_x, _y, 0.3f, 0.3f, ThemeManager::GetPanelColor());
 }

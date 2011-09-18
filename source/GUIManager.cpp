@@ -161,31 +161,64 @@ void GUIManager::update(controller_data_s controller) {
             break;
     }
     
+    float panelWidth = 0.3f;
+    float panelGap = 0.1f;
+    float xStart = -0.7f;
+    float yStart = 0.7f - panelWidth;
+    
     // Update the currently selected panels
     int i = 0;
     for(vector<GUIApplicationPanel>::iterator iter = currentPanels->begin(); iter != currentPanels->end(); ++iter) {
-        (iter)->update(0.1f * i, 0.3f * i);
+        
+        float panelX = xStart + (i * panelWidth) + (i * panelGap);
+       
+        (iter)->update(panelX, yStart);
+        
         i++;
     }
 }
 
 
-void GUIManager::draw() {
-    
-    // Update temps
-    stringstream ss;
-    ss << "CPU " << cpuTemp << "C GPU " << gpuTemp << "C Memory " << memoryTemp << "C Motherboard " << motherboardTemp << "C" << "View Mode: " << viewMode;
-    
-    // Draw the background
-    Xe_SetClearColor(g_pVideoDevice, ThemeManager::GetBackgroundColor());
-    
-    // Draw the currently selected panels
+void GUIManager::DrawPanels()
+{
     for(vector<GUIApplicationPanel>::iterator iter = currentPanels->begin(); iter != currentPanels->end(); ++iter) {
         (iter)->draw();
     }
+}
+
+
+void GUIManager::DrawViewMode()
+{
+    string applications = "applications";
+    string games = "games";
+    string emulators = "emulators";
+    
+    xenuFont.Scale(0.7f);
+    xenuFont.DrawText(applications.c_str(), viewMode == APPLICATIONS ? ThemeManager::GetActiveTextColor() : ThemeManager::GetDisabledTextColor(), 20, 20);
+    xenuFont.DrawText(games.c_str(), viewMode == GAMES ? ThemeManager::GetActiveTextColor() : ThemeManager::GetDisabledTextColor(), 20 + xenuFont.GetTextWidth(applications.c_str()), 20);
+    xenuFont.DrawText(emulators.c_str(), viewMode == EMULATORS ? ThemeManager::GetActiveTextColor() : ThemeManager::GetDisabledTextColor(), 20 + xenuFont.GetTextWidth(applications.c_str()) + xenuFont.GetTextWidth(games.c_str()), 20);
+}
+
+
+void GUIManager::DrawTemperatures()
+{
+    stringstream tempsStringStream;
+    tempsStringStream << "CPU " << cpuTemp << "C GPU " << gpuTemp << "C Memory " << memoryTemp << "C Motherboard " << motherboardTemp << "C";
+    xenuFont.Scale(0.5f);
+    xenuFont.DrawText(tempsStringStream.str().c_str(), ThemeManager::GetTextColor(), -30, -30);
+}
+
+
+void GUIManager::draw() {
+    
+    Xe_SetClearColor(g_pVideoDevice, ThemeManager::GetBackgroundColor());
+    
+    DrawPanels();
     
     xenuFont.Begin();
-    xenuFont.Scale(0.5f);
-    xenuFont.DrawText(ss.str().c_str(), ThemeManager::GetTextColor(), -30, -30);
+    
+    DrawViewMode();
+    DrawTemperatures();
+    
     xenuFont.End();
 }

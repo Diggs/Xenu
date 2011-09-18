@@ -41,8 +41,14 @@ private:
     
     void UpdateViewMode(controller_data_s controller);
     
-    void CreateApplicationPanels();
+    void DrawViewMode();
     
+    void DrawTemperatures();
+    
+    void DrawPanels();
+    
+    void CreateApplicationPanels();
+       
     ZLX::Font xenuFont;
     
     vector<GUIApplicationPanel> *currentPanels;

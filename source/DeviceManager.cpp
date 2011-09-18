@@ -21,8 +21,6 @@ DeviceManager::~DeviceManager() {
 
 vector<string> DeviceManager::GetDevices()
 {
-    LogManager::Log("Getting available devices\n");
-    
     // A vector that will hold all devices
     vector<string> devices;
     
@@ -38,8 +36,6 @@ vector<string> DeviceManager::GetDevices()
     // Make sure we found a device
     while(deviceHandle >= 0) {
         
-        //LogManager::Log("Found available device %s\n", device);
-    
         // Create a new string containing the device name
         string deviceString(device);
         
@@ -57,8 +53,6 @@ vector<string> DeviceManager::GetDevices()
 string DeviceManager::GetDeviceRootPath(string deviceName)
 {
     string deviceRoot = deviceName + ":/";
-    
-    //LogManager::Log("Root path of %s is %s\n", deviceName.c_str(), deviceRoot.c_str());
     
     return deviceRoot;
 }

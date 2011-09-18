@@ -18,6 +18,8 @@ public:
     
     static ZLXColor GetBackgroundColor();
     static ZLXColor GetTextColor();
+    static ZLXColor GetActiveTextColor();
+    static ZLXColor GetDisabledTextColor();
     static ZLXColor GetPanelColor();
 private:
 
