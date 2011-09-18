@@ -13,7 +13,9 @@ main.o: /home/tyler/Development/Xenu/source/main.cpp \
  /usr/local/xenon/usr/include/zlx/Font.h \
  /home/tyler/Development/Xenu/source/GUIApplicationPanel.h \
  /home/tyler/Development/Xenu/source/LibXenonApplication.h \
- /home/tyler/Development/Xenu/source/LogManager.h
+ /home/tyler/Development/Xenu/source/LogManager.h \
+ /usr/local/xenon/usr/include/zlx/Utils.h \
+ /usr/local/xenon/usr/include/zlx/Draw.h
 
 /usr/local/xenon/usr/include/usb/usbmain.h:
 
@@ -44,3 +46,7 @@ main.o: /home/tyler/Development/Xenu/source/main.cpp \
 /home/tyler/Development/Xenu/source/LibXenonApplication.h:
 
 /home/tyler/Development/Xenu/source/LogManager.h:
+
+/usr/local/xenon/usr/include/zlx/Utils.h:
+
+/usr/local/xenon/usr/include/zlx/Draw.h:

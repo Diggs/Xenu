@@ -27,7 +27,7 @@ HardwareManager::HardwareManager() {
 HardwareManager::~HardwareManager() {
 }
 
-void HardwareManager::InitializeXbox(bool enableConsole)
+void HardwareManager::InitializeXbox()
 {
     // Will only be instantiated once for the lifetime of the application
     static int initialized = 0;
@@ -35,19 +35,8 @@ void HardwareManager::InitializeXbox(bool enableConsole)
     // Don't do anything if we've already initialized
     if(initialized == 1) return;
     
-    // Initialize the display
-    //xenos_init(VIDEO_MODE_AUTO);
-    
     // Make sure all CPU cores are at full speed
     xenon_make_it_faster(XENON_SPEED_FULL);
-    
-    // Initialize the debug console
-    
-    // ConsoleEnabled = enableConsole;
-    
-    // if(ConsoleEnabled) {
-    //    console_init();
-    // }
     
     // Initialize USB and scan for devices
     usb_init();

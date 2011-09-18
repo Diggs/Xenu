@@ -17,6 +17,8 @@ public:
     virtual ~ThemeManager();
     
     static ZLXColor GetBackgroundColor();
+    static ZLXColor GetTextColor();
+    static ZLXColor GetPanelColor();
 private:
 
 };

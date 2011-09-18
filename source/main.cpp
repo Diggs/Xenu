@@ -11,7 +11,12 @@
 #include "HardwareManager.h"
 #include "GUIManager.h"
 #include "LogManager.h"
+#include <zlx/zlx.h>
+#include <zlx/Utils.h>
+#include <zlx/Draw.h>
 
+using namespace ZLX;
+using namespace std;
 
 /*
  Xenu Version number
@@ -50,25 +55,29 @@ struct controller_data_s updateInput()
 
 void update()
 {
-    //struct controller_data_s xboxController = updateInput();
+    struct controller_data_s xboxController = updateInput();
 
     gui.update();
 }
 
 
 void draw()
-{    
+{   
+    Begin();
+    
     gui.draw();
+    
+    End();
 }
 
 
 int main()
 {
     // Initialize the Xbox 360 hardware
-    HardwareManager::InitializeXbox(false);
+    HardwareManager::InitializeXbox();
     
+    // Initialiaze the GUI
     gui.initialize();
-    
     
     // Run the main loop
     while(!shouldQuit) {

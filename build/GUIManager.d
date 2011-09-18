@@ -10,14 +10,14 @@ GUIManager.o: /home/tyler/Development/Xenu/source/GUIManager.cpp \
  /usr/local/xenon/usr/include/zlx/Font.h \
  /home/tyler/Development/Xenu/source/GUIApplicationPanel.h \
  /home/tyler/Development/Xenu/source/LibXenonApplication.h \
+ /home/tyler/Development/Xenu/source/DeviceManager.h \
+ /home/tyler/Development/Xenu/source/LibXenonApplicationManager.h \
  /home/tyler/Development/Xenu/source/HardwareManager.h \
  /home/tyler/Development/Xenu/source/ThemeManager.h \
  /home/tyler/Development/Xenu/source/LogManager.h \
  /home/tyler/Development/Xenu/source/Verdana_16_abc.h \
  /home/tyler/Development/Xenu/source/Verdana_16_png.h \
- /usr/local/xenon/usr/include/time/time.h \
- /usr/local/xenon/usr/include/zlx/Utils.h \
- /usr/local/xenon/usr/include/zlx/Draw.h
+ /usr/local/xenon/usr/include/zlx/Utils.h
 
 /home/tyler/Development/Xenu/source/GUIManager.h:
 
@@ -41,6 +41,10 @@ GUIManager.o: /home/tyler/Development/Xenu/source/GUIManager.cpp \
 
 /home/tyler/Development/Xenu/source/LibXenonApplication.h:
 
+/home/tyler/Development/Xenu/source/DeviceManager.h:
+
+/home/tyler/Development/Xenu/source/LibXenonApplicationManager.h:
+
 /home/tyler/Development/Xenu/source/HardwareManager.h:
 
 /home/tyler/Development/Xenu/source/ThemeManager.h:
@@ -51,8 +55,4 @@ GUIManager.o: /home/tyler/Development/Xenu/source/GUIManager.cpp \
 
 /home/tyler/Development/Xenu/source/Verdana_16_png.h:
 
-/usr/local/xenon/usr/include/time/time.h:
-
 /usr/local/xenon/usr/include/zlx/Utils.h:
-
-/usr/local/xenon/usr/include/zlx/Draw.h:

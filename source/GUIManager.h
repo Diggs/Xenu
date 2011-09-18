@@ -4,6 +4,7 @@
  *
  * Created on September 12, 2011, 10:06 PM
  */
+
 #include <stdio.h>
 #include <vector>
 #include <string>
@@ -11,6 +12,7 @@
 #include <zlx/zlx.h>
 #include <zlx/Font.h>
 #include "GUIApplicationPanel.h"
+#include "LibXenonApplication.h"
 
 using namespace std;
 
@@ -20,7 +22,7 @@ using namespace std;
 class GUIManager {
 public:
     GUIManager();
-    //GUIManager(const GUIManager& orig);
+
     virtual ~GUIManager();
     
     void initialize();
@@ -28,10 +30,18 @@ public:
     void update();
     
     void draw();
-
+    
 private:
     
+    enum ViewMode {APPLICATIONS, GAMES, EMULATORS};
+    
+    ViewMode viewMode;
+    
+    void CreateApplicationPanels();
+    
     ZLX::Font xenuFont;
+    
+    vector<GUIApplicationPanel> *currentPanels;
     
     vector<GUIApplicationPanel> applicationPanels;
     

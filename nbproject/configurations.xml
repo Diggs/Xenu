@@ -801,51 +801,6 @@
             <in>vm.h</in>
             <in>xenonsprs.h</in>
           </df>
-          <df name="SDL">
-            <in>SDL.h</in>
-            <in>SDL_active.h</in>
-            <in>SDL_audio.h</in>
-            <in>SDL_byteorder.h</in>
-            <in>SDL_cdrom.h</in>
-            <in>SDL_config.h</in>
-            <in>SDL_config_dreamcast.h</in>
-            <in>SDL_config_macos.h</in>
-            <in>SDL_config_macosx.h</in>
-            <in>SDL_config_minimal.h</in>
-            <in>SDL_config_nds.h</in>
-            <in>SDL_config_os2.h</in>
-            <in>SDL_config_symbian.h</in>
-            <in>SDL_config_win32.h</in>
-            <in>SDL_config_xenon.h</in>
-            <in>SDL_copying.h</in>
-            <in>SDL_cpuinfo.h</in>
-            <in>SDL_endian.h</in>
-            <in>SDL_error.h</in>
-            <in>SDL_events.h</in>
-            <in>SDL_getenv.h</in>
-            <in>SDL_joystick.h</in>
-            <in>SDL_keyboard.h</in>
-            <in>SDL_keysym.h</in>
-            <in>SDL_loadso.h</in>
-            <in>SDL_main.h</in>
-            <in>SDL_mouse.h</in>
-            <in>SDL_mutex.h</in>
-            <in>SDL_name.h</in>
-            <in>SDL_opengl.h</in>
-            <in>SDL_platform.h</in>
-            <in>SDL_quit.h</in>
-            <in>SDL_rwops.h</in>
-            <in>SDL_stdinc.h</in>
-            <in>SDL_syswm.h</in>
-            <in>SDL_thread.h</in>
-            <in>SDL_timer.h</in>
-            <in>SDL_types.h</in>
-            <in>SDL_version.h</in>
-            <in>SDL_video.h</in>
-            <in>_SDL_config.h</in>
-            <in>begin_code.h</in>
-            <in>close_code.h</in>
-          </df>
           <df name="sys">
             <in>dirent.h</in>
           </df>
@@ -1684,13 +1639,7 @@
       </df>
     </df>
     <df name="Xenu" root=".">
-      <df name=".git">
-        <df name="logs">
-        </df>
-      </df>
       <df name="build">
-        <in>DeviceManager.d</in>
-        <in>FileManager.d</in>
       </df>
       <df name="Misc">
       </df>

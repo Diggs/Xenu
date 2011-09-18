@@ -25,7 +25,7 @@ vector<LibXenonApplication> LibXenonApplicationManager::GetApplications(string d
     //LogManager::Log("Looking for applications in %s\n", directoryPath.c_str());
     
     // A vector of applications we will return
-    vector<LibXenonApplication> applications;
+    vector<LibXenonApplication> applications = vector<LibXenonApplication>();
     
     // Get a list of all directories at the specified path
     vector<dirent> directories = FileManager::GetDirectoryListing(directoryPath, FILEMANAGER_DIRECTORIES);

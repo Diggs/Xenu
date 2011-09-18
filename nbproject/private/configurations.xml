@@ -27,8 +27,27 @@
       <runprofile version="9">
         <runcommandpicklist>
           <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+          <runcommandpicklistitem>cp /home/tyler/Development/Xenu/Xenu.elf32 /var/lib/tftpboot/tftpboot/xenon
+chown nobody.nogroup /var/lib/tftpboot/tftpboot/xenon
+chmod 777 /var/lib/tftpboot/tftpboot/xenon</runcommandpicklistitem>
+          <runcommandpicklistitem>cp /home/tyler/Development/Xenu/Xenu.elf32 /var/lib/tftpboot/tftpboot/xenon.elf32
+chown nobody.nogroup /var/lib/tftpboot/tftpboot/xenon.elf32
+chmod 777 /var/lib/tftpboot/tftpboot/xenon.elf32
+</runcommandpicklistitem>
+          <runcommandpicklistitem>cp /home/tyler/Development/Xenu/Xenu.elf32 /var/lib/tftpboot/tftpboot/
+chown nobody.nogroup /var/lib/tftpboot/tftpboot/xenon.elf32
+chmod 777 /var/lib/tftpboot/tftpboot/xenon.elf32</runcommandpicklistitem>
+          <runcommandpicklistitem>${MAKE} -f Makefile run</runcommandpicklistitem>
+          <runcommandpicklistitem>cp /home/tyler/Development/Xenu/Xenu.elf32 /var/lib/tftpboot/tftpboot/
+mv /var/lib/tftpboot/tftpboot/Xenu.elf32 /var/lib/tftpboot/tftpboot/xenon
+chmod 777 /var/lib/tftpboot/tftpboot/xenon
+</runcommandpicklistitem>
+          <runcommandpicklistitem>cp /home/tyler/Development/Xenu/Xenu.elf32 /var/lib/tftpboot/tftpboot/
+mv /var/lib/tftpboot/tftpboot/Xenu.elf32 /var/lib/tftpboot/tftpboot/xenon
+chmod 777 /var/lib/tftpboot/tftpboot/xenon</runcommandpicklistitem>
+          <runcommandpicklistitem>./deploy.sh</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}"</runcommand>
+        <runcommand>./deploy.sh</runcommand>
         <rundir>.</rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>

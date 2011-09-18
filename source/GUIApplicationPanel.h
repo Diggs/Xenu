@@ -10,20 +10,22 @@
 #ifndef GUIAPPLICATIONPANEL_H
 #define	GUIAPPLICATIONPANEL_H
 
-/**
- * This class manages the Xenu GUI. It is responsible for updating and drawing
- * all aspects of the GUI at the appropriate time.
- */
+
 class GUIApplicationPanel {
 public:
     GUIApplicationPanel(LibXenonApplication libXenonApplication);
+    GUIApplicationPanel(const GUIApplicationPanel& orig);
     virtual ~GUIApplicationPanel();
     
-    void update();
+    void update(float x, float y);
     
     void draw();
+
 private:
     LibXenonApplication application;
+
+    float _x, _y;
+    bool _selected;
 };
 
 #endif	/* GUIAPPLICATIONPANEL_H */

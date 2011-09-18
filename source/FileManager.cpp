@@ -21,7 +21,7 @@ FileManager::~FileManager() {
 std::vector<dirent> FileManager::GetDirectoryListing(string directoryPath, int fileType)
 {
     // A vector of directory entries we will return
-    vector<dirent> directoryEntries;
+    vector<dirent> directoryEntries = vector<dirent>();
     
     // Open the path we were provided
     DIR *directory = opendir(directoryPath.c_str());

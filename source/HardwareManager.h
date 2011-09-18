@@ -17,11 +17,9 @@ public:
     HardwareManager();
     virtual ~HardwareManager();
     
-    static void InitializeXbox(bool enableConsole);
+    static void InitializeXbox();
     
     static void GetSystemTemperatures(float *cpu, float *gpu, float *memory, float *motherboard);
-    
-    static bool ConsoleEnabled;
 private:
     
 };
