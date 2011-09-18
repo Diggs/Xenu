@@ -11,6 +11,8 @@
 #include <iostream>
 #include <zlx/zlx.h>
 #include <zlx/Font.h>
+#include <usb/usbmain.h>
+#include <input/input.h>
 #include "GUIApplicationPanel.h"
 #include "LibXenonApplication.h"
 
@@ -27,7 +29,7 @@ public:
     
     void initialize();
     
-    void update();
+    void update(controller_data_s controller);
     
     void draw();
     
@@ -36,6 +38,8 @@ private:
     enum ViewMode {APPLICATIONS, GAMES, EMULATORS};
     
     ViewMode viewMode;
+    
+    void UpdateViewMode(controller_data_s controller);
     
     void CreateApplicationPanels();
     

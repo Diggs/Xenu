@@ -97,12 +97,53 @@ void GUIManager::CreateApplicationPanels()
 }
 
 
-void GUIManager::update() {
+void GUIManager::UpdateViewMode(controller_data_s controller)
+{
+    // If left shoulder button push move backwards through views
+    if(controller.lb) {
+        switch(viewMode) {
+            
+            case APPLICATIONS:
+                viewMode = EMULATORS;
+                break;
+            
+            case GAMES:
+                viewMode = APPLICATIONS;
+                break;
+
+            case EMULATORS:
+                viewMode = GAMES;
+                break;
+        }
+    }
+    
+    // If right shoulder button push move forwards through views
+    if(controller.rb) {
+        switch(viewMode) {
+            
+           case EMULATORS:
+                viewMode = APPLICATIONS;
+                break;
+                
+           case APPLICATIONS:
+                viewMode = GAMES;
+                break;
+                
+           case GAMES:
+                viewMode = EMULATORS;
+                break;
+        }
+    }
+}
+
+
+void GUIManager::update(controller_data_s controller) {
 
     // Update system temperatures
     HardwareManager::GetSystemTemperatures(&cpuTemp, &gpuTemp, &memoryTemp, &motherboardTemp);
     
-    // TODO Check input and change view mode here
+    // Update view based on new controller input
+    UpdateViewMode(controller);
     
     // Depending on the view mode we only want to target specific panels for update and drawing.
     switch(viewMode) {
@@ -133,7 +174,7 @@ void GUIManager::draw() {
     
     // Update temps
     stringstream ss;
-    ss << "CPU " << cpuTemp << "C GPU " << gpuTemp << "C Memory " << memoryTemp << "C Motherboard " << motherboardTemp << "C";
+    ss << "CPU " << cpuTemp << "C GPU " << gpuTemp << "C Memory " << memoryTemp << "C Motherboard " << motherboardTemp << "C" << "View Mode: " << viewMode;
     
     // Draw the background
     Xe_SetClearColor(g_pVideoDevice, ThemeManager::GetBackgroundColor());

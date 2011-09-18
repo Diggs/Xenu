@@ -36,28 +36,28 @@ static GUIManager gui;
 struct controller_data_s updateInput()
 {
     // Will contain current state of game pad
-    static struct controller_data_s xboxController;
+    static struct controller_data_s controller;
     
     // Poll for USB devices..
     usb_do_poll();
     
     // Update the game pad state
-    get_controller_data(&xboxController, 0);
+    get_controller_data(&controller, 0);
     
     // Logo quits the app...
-    if(xboxController.logo) {
+    if(controller.logo) {
         shouldQuit = true;
     }
     
-    return xboxController;
+    return controller;
 }
 
 
 void update()
 {
-    struct controller_data_s xboxController = updateInput();
+    struct controller_data_s controller = updateInput();
 
-    gui.update();
+    gui.update(controller);
 }
 
 

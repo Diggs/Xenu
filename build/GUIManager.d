@@ -8,6 +8,8 @@ GUIManager.o: /home/tyler/Development/Xenu/source/GUIManager.cpp \
  /usr/local/xenon/usr/include/xenos/edram.h \
  /usr/local/xenon/usr/include/console/console.h \
  /usr/local/xenon/usr/include/zlx/Font.h \
+ /usr/local/xenon/usr/include/usb/usbmain.h \
+ /usr/local/xenon/usr/include/input/input.h \
  /home/tyler/Development/Xenu/source/GUIApplicationPanel.h \
  /home/tyler/Development/Xenu/source/LibXenonApplication.h \
  /home/tyler/Development/Xenu/source/DeviceManager.h \
@@ -36,6 +38,10 @@ GUIManager.o: /home/tyler/Development/Xenu/source/GUIManager.cpp \
 /usr/local/xenon/usr/include/console/console.h:
 
 /usr/local/xenon/usr/include/zlx/Font.h:
+
+/usr/local/xenon/usr/include/usb/usbmain.h:
+
+/usr/local/xenon/usr/include/input/input.h:
 
 /home/tyler/Development/Xenu/source/GUIApplicationPanel.h:
 
