@@ -194,9 +194,9 @@ void GUIManager::DrawViewMode()
     string emulators = "emulators";
     
     xenuFont.Scale(0.7f);
-    xenuFont.DrawText(applications.c_str(), viewMode == APPLICATIONS ? ThemeManager::GetActiveTextColor() : ThemeManager::GetDisabledTextColor(), 20, 20);
-    xenuFont.DrawText(games.c_str(), viewMode == GAMES ? ThemeManager::GetActiveTextColor() : ThemeManager::GetDisabledTextColor(), 20 + xenuFont.GetTextWidth(applications.c_str()), 20);
-    xenuFont.DrawText(emulators.c_str(), viewMode == EMULATORS ? ThemeManager::GetActiveTextColor() : ThemeManager::GetDisabledTextColor(), 20 + xenuFont.GetTextWidth(applications.c_str()) + xenuFont.GetTextWidth(games.c_str()), 20);
+    xenuFont.DrawText(applications.c_str(), (viewMode == APPLICATIONS ? ThemeManager::GetActiveTextColor() : ThemeManager::GetDisabledTextColor()), 20, 20);
+    xenuFont.DrawText(games.c_str(), (viewMode == GAMES ? ThemeManager::GetActiveTextColor() : ThemeManager::GetDisabledTextColor()), 20 + xenuFont.GetTextWidth(applications.c_str()), 20);
+    xenuFont.DrawText(emulators.c_str(), (viewMode == EMULATORS ? ThemeManager::GetActiveTextColor() : ThemeManager::GetDisabledTextColor()), 20 + xenuFont.GetTextWidth(applications.c_str()) + xenuFont.GetTextWidth(games.c_str()), 20);
 }
 
 
