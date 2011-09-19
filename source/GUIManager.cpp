@@ -15,6 +15,7 @@
 #include "LogManager.h"
 #include "Verdana_16_abc.h"
 #include "Verdana_16_png.h"
+
 #include <sstream>
 #include <iostream>
 #include <dirent.h>
@@ -81,17 +82,17 @@ void GUIManager::CreateApplicationPanels()
         
         // Create panels for applications
         for(vector<LibXenonApplication>::iterator iter = applications.begin(); iter != applications.end(); ++iter) {
-            applicationPanels.push_back(GUIApplicationPanel((*iter)));
+            applicationPanels.push_back(GUIApplicationPanel(*iter));
         }
         
         // Create panels for games
         for(vector<LibXenonApplication>::iterator iter = games.begin(); iter != games.end(); ++iter) {
-            gamePanels.push_back(GUIApplicationPanel((*iter)));
+            gamePanels.push_back(GUIApplicationPanel(*iter));
         }
         
         // Create panels for emulators
         for(vector<LibXenonApplication>::iterator iter = emulators.begin(); iter != emulators.end(); ++iter) {
-            emulatorPanels.push_back(GUIApplicationPanel((*iter)));
+            emulatorPanels.push_back(GUIApplicationPanel(*iter));
         }
     }
 }
@@ -137,14 +138,8 @@ void GUIManager::UpdateViewMode(controller_data_s controller)
 }
 
 
-void GUIManager::update(controller_data_s controller) {
-
-    // Update system temperatures
-    HardwareManager::GetSystemTemperatures(&cpuTemp, &gpuTemp, &memoryTemp, &motherboardTemp);
-    
-    // Update view based on new controller input
-    UpdateViewMode(controller);
-    
+void GUIManager::UpdatePanels()
+{
     // Depending on the view mode we only want to target specific panels for update and drawing.
     switch(viewMode) {
         
@@ -162,27 +157,73 @@ void GUIManager::update(controller_data_s controller) {
     }
     
     float panelWidth = 0.3f;
+    float panelHeight = 0.3f;
     float panelGap = 0.1f;
     float xStart = -0.7f;
-    float yStart = 0.7f - panelWidth;
+    float yStart = 0.7f - panelHeight;
     
-    // Update the currently selected panels
-    int i = 0;
-    for(vector<GUIApplicationPanel>::iterator iter = currentPanels->begin(); iter != currentPanels->end(); ++iter) {
+    // How many panels will we draw per screen horizontally
+    int horizontalPanels = 5;
+    
+    // How many panels will we draw per screen vertically
+    int verticalPanels = 4;
+    
+    // How many screens worth of panels do we have TODO Calculate this
+    int renderPasses = 1;
+    
+    // The offset that will be applied to the x postion of each panel
+    float horizontalOffset = 0;
+    
+    // The index of the current panel we are updating
+    unsigned int panelIndex = 0;
+    
+    // Render each screens worth of panels
+    for(int currentPass = 0; currentPass < renderPasses; currentPass++) {
         
-        float panelX = xStart + (i * panelWidth) + (i * panelGap);
-       
-        (iter)->update(panelX, yStart);
+        horizontalOffset = currentPass * 1.0f;
         
-        i++;
+        for(int verticalPanel = 0; verticalPanel < verticalPanels; verticalPanel++) {
+            
+            for(int horizontalPanel = 0; horizontalPanel < horizontalPanels; horizontalPanel++) {
+                
+                // Make sure we haven't exceeded the amount of panels we're drawing...
+                if(panelIndex >= currentPanels->size()){break;}
+
+                // Get the panel at the current index
+                GUIApplicationPanel currentPanel = currentPanels->at(panelIndex);
+                
+                // Calculate its position
+                float panelX = horizontalOffset + xStart + (horizontalPanel * panelWidth) + (horizontalPanel * panelGap);
+                float panelY = yStart + (verticalPanel * panelHeight) + (verticalPanel * panelGap);
+                
+                // Update the panel
+                currentPanel.update(panelX, panelY);
+                
+                // Move to the next panel...
+                panelIndex++;
+            }
+        }
     }
+}
+
+
+void GUIManager::update(controller_data_s controller) {
+
+    // Update system temperatures
+    HardwareManager::GetSystemTemperatures(&cpuTemp, &gpuTemp, &memoryTemp, &motherboardTemp);
+    
+    // Update view based on new controller input
+    UpdateViewMode(controller);
+    
+    // Update panels based on currently selected view
+    UpdatePanels();
 }
 
 
 void GUIManager::DrawPanels()
 {
     for(vector<GUIApplicationPanel>::iterator iter = currentPanels->begin(); iter != currentPanels->end(); ++iter) {
-        (iter)->draw();
+        iter->draw();
     }
 }
 

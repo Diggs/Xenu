@@ -41,6 +41,8 @@ private:
     
     void UpdateViewMode(controller_data_s controller);
     
+    void UpdatePanels();
+    
     void DrawViewMode();
     
     void DrawTemperatures();

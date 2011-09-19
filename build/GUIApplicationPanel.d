@@ -10,6 +10,7 @@ GUIApplicationPanel.o: \
  /usr/local/xenon/usr/include/xenos/xenos.h \
  /usr/local/xenon/usr/include/xenos/edram.h \
  /usr/local/xenon/usr/include/console/console.h \
+ /home/tyler/Development/Xenu/source/LogManager.h \
  /usr/local/xenon/usr/include/zlx/Draw.h
 
 /home/tyler/Development/Xenu/source/GUIApplicationPanel.h:
@@ -31,5 +32,7 @@ GUIApplicationPanel.o: \
 /usr/local/xenon/usr/include/xenos/edram.h:
 
 /usr/local/xenon/usr/include/console/console.h:
+
+/home/tyler/Development/Xenu/source/LogManager.h:
 
 /usr/local/xenon/usr/include/zlx/Draw.h:

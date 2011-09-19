@@ -31,7 +31,7 @@ ZLXColor ThemeManager::GetTextColor()
 
 ZLXColor ThemeManager::GetDisabledTextColor()
 {
-    return 0xFFD3D3D3;
+    return 0x66FFFFFF;
 }
 
 ZLXColor ThemeManager::GetActiveTextColor()
@@ -42,5 +42,5 @@ ZLXColor ThemeManager::GetActiveTextColor()
 
 ZLXColor ThemeManager::GetPanelColor()
 {
-    return 0xFF000000;
+    return 0xFFF09609;
 }
