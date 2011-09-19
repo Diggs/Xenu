@@ -1640,12 +1640,6 @@
     </df>
     <df name="Xenu" root=".">
       <df name="build">
-        <in>DeviceManager.d</in>
-        <in>FileManager.d</in>
-        <in>GUIApplicationPanel.d</in>
-        <in>GUIManager.d</in>
-        <in>HardwareManager.d</in>
-        <in>LibXenonApplication.d</in>
       </df>
       <df name="Misc">
       </df>

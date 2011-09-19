@@ -158,7 +158,7 @@ void GUIManager::UpdatePanels()
     
     float panelWidth = 0.3f;
     float panelHeight = 0.3f;
-    float panelGap = 0.1f;
+    float panelGap = 0.01f;
     float xStart = -0.7f;
     float yStart = 0.7f - panelHeight;
     
@@ -190,11 +190,11 @@ void GUIManager::UpdatePanels()
                 if(panelIndex >= currentPanels->size()){break;}
 
                 // Get the panel at the current index
-                GUIApplicationPanel currentPanel = currentPanels->at(panelIndex);
+                GUIApplicationPanel& currentPanel = currentPanels->at(panelIndex);
                 
                 // Calculate its position
                 float panelX = horizontalOffset + xStart + (horizontalPanel * panelWidth) + (horizontalPanel * panelGap);
-                float panelY = yStart + (verticalPanel * panelHeight) + (verticalPanel * panelGap);
+                float panelY = yStart - (verticalPanel * panelHeight) - (verticalPanel * panelGap);
                 
                 // Update the panel
                 currentPanel.update(panelX, panelY);
