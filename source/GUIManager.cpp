@@ -181,7 +181,11 @@ void GUIManager::UpdateCurrentPanels()
 void GUIManager::UpdatePanels(controller_data_s controller)
 {   
     // The offset that will be applied to the x postion of each panel
+    // This should not be affected by controller input.
     float horizontalOffset = 0;
+    
+    // This offset can be modified to move all panels left or right i.e. By controller input.
+    float horizontalOffsetModifier = 0.0f;
     
     // The width of a panel
     float panelWidth = 0.3f;
@@ -194,9 +198,6 @@ void GUIManager::UpdatePanels(controller_data_s controller)
 
     // The offset from the top of the screen
     float verticalOffset = 0.6f - panelHeight;
-    
-    // This offset can be modified to move all panels left or right
-    float horizontalOffsetModifier = 0.0f;
     
     // How many panels will we draw per screen horizontally
     int horizontalPanels = 5;
