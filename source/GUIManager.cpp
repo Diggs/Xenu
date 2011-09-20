@@ -180,6 +180,12 @@ void GUIManager::UpdateCurrentPanels()
 
 void GUIManager::UpdatePanels(controller_data_s controller)
 {   
+    const float screenHeight = 2.0f;
+    const float screenWidth = 2.0f;
+    const float screenTop = 1.0f;
+    const float screenLeft = -1.0f;
+    const float screenRight = 1.0f;
+
     // The offset that will be applied to the x postion of each panel
     // This should not be affected by controller input.
     float horizontalOffset = 0;
@@ -195,9 +201,6 @@ void GUIManager::UpdatePanels(controller_data_s controller)
     
     // The amount of space between each panel
     float panelGap = 0.012f;
-
-    // The offset from the top of the screen
-    float verticalOffset = 0.6f - panelHeight;
     
     // How many panels will we draw per screen horizontally
     int horizontalPanels = 5;
@@ -208,9 +211,15 @@ void GUIManager::UpdatePanels(controller_data_s controller)
     // Calculate how much horizontal screen space all the panels will take
     float totalWidthOfPanels = (panelWidth * horizontalPanels) + (panelGap * horizontalPanels);
     
-    // Calculate how much screen space is left to pad each side of the panels i.e. Center the panels
-    float horizontalScreenPadding = (2.0f - totalWidthOfPanels) / 2;
-
+    // Calculate how much screen space is left to pad each side of the panels i.e. Center the panels horizontally
+    float horizontalScreenPadding = (screenWidth - totalWidthOfPanels) / 2;
+    
+    // Calculate how much vertical screen space all the panels will take
+    float totalHeightOfPanels = (panelHeight * verticalPanels) + (panelGap * verticalPanels);
+    
+    // Calculate how much screen space is left to pad top and bottom of the panels i.e. Center the panels vertically
+    float verticalScreenPadding = (screenHeight - totalHeightOfPanels) / 2;
+    
     // How many screens worth of panels do we have
     int renderPasses = ceil(((double)(currentPanels->size())) / (horizontalPanels * verticalPanels));
     
@@ -223,9 +232,9 @@ void GUIManager::UpdatePanels(controller_data_s controller)
         // If we're on the first pass then we're dealing with a negative offset
         // All subsequent passes will be positive
         if(currentPass == 0) {
-            horizontalOffset = (-1.0f + horizontalScreenPadding) + horizontalOffsetModifier;
+            horizontalOffset = (screenLeft + horizontalScreenPadding) + horizontalOffsetModifier;
         } else {
-            horizontalOffset = (currentPass * (1.0f + horizontalScreenPadding)) + horizontalOffsetModifier;
+            horizontalOffset = (currentPass * (screenRight + horizontalScreenPadding)) + horizontalOffsetModifier;
         }
         
         for(int verticalPanel = 0; verticalPanel < verticalPanels; verticalPanel++) {
@@ -240,7 +249,7 @@ void GUIManager::UpdatePanels(controller_data_s controller)
                 
                 // Calculate its position
                 float panelX = horizontalOffset + (horizontalPanel * panelWidth) + (horizontalPanel * panelGap);
-                float panelY = verticalOffset - (verticalPanel * panelHeight) - (verticalPanel * panelGap);
+                float panelY = (screenTop - verticalScreenPadding - panelHeight) - (verticalPanel * panelHeight) - (verticalPanel * panelGap);
                 
                 // Update the panel
                 currentPanel.update(panelX, panelY);
