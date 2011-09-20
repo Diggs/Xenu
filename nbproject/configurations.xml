@@ -1714,5 +1714,40 @@
         </makeTool>
       </makefileType>
     </conf>
+    <conf name="Debug_Log" type="0">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+      </toolsSet>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>.</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f Makefile</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
+          <executablePath></executablePath>
+          <cTool>
+            <incDir>
+              <pElem>/usr/local/xenon</pElem>
+              <pElem>/opt/free60-git/free60/libxenon</pElem>
+              <pElem>/usr/local/xenon/include</pElem>
+              <pElem>.</pElem>
+              <pElem>/opt/free60-git/free60/libxenon/include</pElem>
+            </incDir>
+          </cTool>
+          <ccTool>
+            <incDir>
+              <pElem>/usr/local/xenon</pElem>
+              <pElem>/opt/free60-git/free60/libxenon</pElem>
+              <pElem>/usr/local/xenon/include</pElem>
+              <pElem>.</pElem>
+              <pElem>/opt/free60-git/free60/libxenon/include</pElem>
+            </incDir>
+            <preprocessorList>
+              <Elem>#define DEBUGLOG</Elem>
+            </preprocessorList>
+          </ccTool>
+        </makeTool>
+      </makefileType>
+    </conf>
   </confs>
 </configurationDescriptor>

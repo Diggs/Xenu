@@ -41,7 +41,9 @@ private:
     
     void UpdateViewMode(controller_data_s controller);
     
-    void UpdatePanels();
+    void UpdatePanels(controller_data_s controller);
+    
+    void UpdateCurrentPanels();
     
     void DrawViewMode();
     
@@ -68,6 +70,12 @@ private:
     float memoryTemp;
     
     float motherboardTemp;
+    
+    bool isKeyDown;
+    
+    enum CurrentKeyDown {RB, LB};
+    
+    CurrentKeyDown currentKeyDown;
 };
 
 #endif	/* GUIMANAGER_H */

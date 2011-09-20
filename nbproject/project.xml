@@ -19,6 +19,10 @@
                     <name>Default</name>
                     <type>0</type>
                 </confElem>
+                <confElem>
+                    <name>Debug_Log</name>
+                    <type>0</type>
+                </confElem>
             </confList>
         </data>
     </configuration>

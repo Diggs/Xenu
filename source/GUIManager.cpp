@@ -15,9 +15,9 @@
 #include "LogManager.h"
 #include "Verdana_16_abc.h"
 #include "Verdana_16_png.h"
-
 #include <sstream>
 #include <iostream>
+#include <math.h>
 #include <dirent.h>
 #include <vector>
 #include <string>
@@ -100,45 +100,65 @@ void GUIManager::CreateApplicationPanels()
 
 void GUIManager::UpdateViewMode(controller_data_s controller)
 {
-    // If left shoulder button push move backwards through views
-    if(controller.lb) {
-        switch(viewMode) {
-            
-            case APPLICATIONS:
-                viewMode = EMULATORS;
-                break;
-            
-            case GAMES:
-                viewMode = APPLICATIONS;
-                break;
-
-            case EMULATORS:
-                viewMode = GAMES;
-                break;
+    // If either of these are being pushed we have a keydown state
+    if(controller.rb || controller.lb) {
+        
+        isKeyDown = true;
+        
+        if(controller.rb) {
+            currentKeyDown = RB;
+        } else {
+            currentKeyDown = LB;
         }
     }
     
-    // If right shoulder button push move forwards through views
-    if(controller.rb) {
-        switch(viewMode) {
-            
-           case EMULATORS:
-                viewMode = APPLICATIONS;
-                break;
-                
-           case APPLICATIONS:
-                viewMode = GAMES;
-                break;
-                
-           case GAMES:
-                viewMode = EMULATORS;
-                break;
+    // If either of the shoulder buttons are not being pushed, when they previously were
+    // then we have a key up
+    if(!controller.rb && !controller.lb && isKeyDown == true)  {
+
+        // If left shoulder button pushed move backwards through views
+        if(currentKeyDown == LB) {
+            switch(viewMode) {
+
+                case APPLICATIONS:
+                    viewMode = EMULATORS;
+                    break;
+
+                case GAMES:
+                    viewMode = APPLICATIONS;
+                    break;
+
+                case EMULATORS:
+                    viewMode = GAMES;
+                    break;
+            }
         }
+
+        // If right shoulder button pushed move forwards through views
+        if(currentKeyDown == RB) {
+            switch(viewMode) {
+
+               case EMULATORS:
+                    viewMode = APPLICATIONS;
+                    break;
+
+               case APPLICATIONS:
+                    viewMode = GAMES;
+                    break;
+
+               case GAMES:
+                    viewMode = EMULATORS;
+                    break;
+            }
+        }
+        
+        // Reset the key down state
+        isKeyDown = false;
     }
 }
 
 
-void GUIManager::UpdatePanels()
+void GUIManager::UpdateCurrentPanels()
 {
     // Depending on the view mode we only want to target specific panels for update and drawing.
     switch(viewMode) {
@@ -155,12 +175,28 @@ void GUIManager::UpdatePanels()
             currentPanels = &emulatorPanels;
             break;
     }
+}
+
+
+void GUIManager::UpdatePanels(controller_data_s controller)
+{   
+    // The offset that will be applied to the x postion of each panel
+    float horizontalOffset = 0;
     
+    // The width of a panel
     float panelWidth = 0.3f;
+    
+    // The height of a panel
     float panelHeight = 0.3f;
-    float panelGap = 0.01f;
-    float xStart = -0.7f;
-    float yStart = 0.7f - panelHeight;
+    
+    // The amount of space between each panel
+    float panelGap = 0.012f;
+
+    // The offset from the top of the screen
+    float verticalOffset = 0.6f - panelHeight;
+    
+    // This offset can be modified to move all panels left or right
+    float horizontalOffsetModifier = 0.0f;
     
     // How many panels will we draw per screen horizontally
     int horizontalPanels = 5;
@@ -168,11 +204,14 @@ void GUIManager::UpdatePanels()
     // How many panels will we draw per screen vertically
     int verticalPanels = 4;
     
-    // How many screens worth of panels do we have TODO Calculate this
-    int renderPasses = 1;
+    // Calculate how much horizontal screen space all the panels will take
+    float totalWidthOfPanels = (panelWidth * horizontalPanels) + (panelGap * horizontalPanels);
     
-    // The offset that will be applied to the x postion of each panel
-    float horizontalOffset = 0;
+    // Calculate how much screen space is left to pad each side of the panels i.e. Center the panels
+    float horizontalScreenPadding = (2.0f - totalWidthOfPanels) / 2;
+
+    // How many screens worth of panels do we have
+    int renderPasses = ceil(((double)(currentPanels->size())) / (horizontalPanels * verticalPanels));
     
     // The index of the current panel we are updating
     unsigned int panelIndex = 0;
@@ -180,7 +219,13 @@ void GUIManager::UpdatePanels()
     // Render each screens worth of panels
     for(int currentPass = 0; currentPass < renderPasses; currentPass++) {
         
-        horizontalOffset = currentPass * 1.0f;
+        // If we're on the first pass then we're dealing with a negative offset
+        // All subsequent passes will be positive
+        if(currentPass == 0) {
+            horizontalOffset = (-1.0f + horizontalScreenPadding) + horizontalOffsetModifier;
+        } else {
+            horizontalOffset = (currentPass * (1.0f + horizontalScreenPadding)) + horizontalOffsetModifier;
+        }
         
         for(int verticalPanel = 0; verticalPanel < verticalPanels; verticalPanel++) {
             
@@ -193,8 +238,8 @@ void GUIManager::UpdatePanels()
                 GUIApplicationPanel& currentPanel = currentPanels->at(panelIndex);
                 
                 // Calculate its position
-                float panelX = horizontalOffset + xStart + (horizontalPanel * panelWidth) + (horizontalPanel * panelGap);
-                float panelY = yStart - (verticalPanel * panelHeight) - (verticalPanel * panelGap);
+                float panelX = horizontalOffset + (horizontalPanel * panelWidth) + (horizontalPanel * panelGap);
+                float panelY = verticalOffset - (verticalPanel * panelHeight) - (verticalPanel * panelGap);
                 
                 // Update the panel
                 currentPanel.update(panelX, panelY);
@@ -215,8 +260,11 @@ void GUIManager::update(controller_data_s controller) {
     // Update view based on new controller input
     UpdateViewMode(controller);
     
+    // Update the "CurrentPanels" member variable to point to the relevant panel collection
+    UpdateCurrentPanels();
+    
     // Update panels based on currently selected view
-    UpdatePanels();
+    UpdatePanels(controller);
 }
 
 

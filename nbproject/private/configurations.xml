@@ -20,6 +20,62 @@
         <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
       </dbx_gdbdebugger>
       <gizmo_options version="3">
+        <configurationname>GizmoSimple</configurationname>
+      </gizmo_options>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
+      <runprofile version="9">
+        <runcommandpicklist>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+          <runcommandpicklistitem>cp /home/tyler/Development/Xenu/Xenu.elf32 /var/lib/tftpboot/tftpboot/xenon
+chown nobody.nogroup /var/lib/tftpboot/tftpboot/xenon
+chmod 777 /var/lib/tftpboot/tftpboot/xenon</runcommandpicklistitem>
+          <runcommandpicklistitem>cp /home/tyler/Development/Xenu/Xenu.elf32 /var/lib/tftpboot/tftpboot/xenon.elf32
+chown nobody.nogroup /var/lib/tftpboot/tftpboot/xenon.elf32
+chmod 777 /var/lib/tftpboot/tftpboot/xenon.elf32
+</runcommandpicklistitem>
+          <runcommandpicklistitem>cp /home/tyler/Development/Xenu/Xenu.elf32 /var/lib/tftpboot/tftpboot/
+chown nobody.nogroup /var/lib/tftpboot/tftpboot/xenon.elf32
+chmod 777 /var/lib/tftpboot/tftpboot/xenon.elf32</runcommandpicklistitem>
+          <runcommandpicklistitem>${MAKE} -f Makefile run</runcommandpicklistitem>
+          <runcommandpicklistitem>cp /home/tyler/Development/Xenu/Xenu.elf32 /var/lib/tftpboot/tftpboot/
+mv /var/lib/tftpboot/tftpboot/Xenu.elf32 /var/lib/tftpboot/tftpboot/xenon
+chmod 777 /var/lib/tftpboot/tftpboot/xenon
+</runcommandpicklistitem>
+          <runcommandpicklistitem>cp /home/tyler/Development/Xenu/Xenu.elf32 /var/lib/tftpboot/tftpboot/
+mv /var/lib/tftpboot/tftpboot/Xenu.elf32 /var/lib/tftpboot/tftpboot/xenon
+chmod 777 /var/lib/tftpboot/tftpboot/xenon</runcommandpicklistitem>
+          <runcommandpicklistitem>./deploy.sh</runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>./deploy.sh</runcommand>
+        <rundir>.</rundir>
+        <buildfirst>true</buildfirst>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+    <conf name="Debug_Log" type="0">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <platform>2</platform>
+      </toolsSet>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_options>
+          <DebugOptions>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <gizmo_options version="3">
+        <configurationname>GizmoSimple</configurationname>
       </gizmo_options>
       <nativedebugger version="1">
         <engine>gdb</engine>

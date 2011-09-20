@@ -22,13 +22,10 @@ LogManager::~LogManager() {
 
 void LogManager::Log(const char* str)
 {
-    // Log out to file
-    FILE *log = fopen("uda:/XenuLog.txt","a+");
-    fprintf(log, "%s", str);
-    fclose(log);
-    
-    // Print to console if enabled
-    // if(HardwareManager::ConsoleEnabled) {
-    //    printf("%s", str);
-    // }
+    //#ifdef DEBUGLOG
+        // Log out to file
+        FILE *log = fopen("uda:/XenuLog.txt","a+");
+        fprintf(log, "%s", str);
+        fclose(log);
+    //#endif
 }
