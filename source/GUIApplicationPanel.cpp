@@ -41,11 +41,5 @@ void GUIApplicationPanel::update(float x, float y)
     
 void GUIApplicationPanel::draw()
 {
-    stringstream ss;
-    
-    ss << "Drawing panel at x: " << _x << " and y: " << _y << endl;
-    
-    LogManager::Log(ss.str().c_str());
-    
     Draw::DrawColoredRect(_x, _y, 0.3f, 0.3f, ThemeManager::GetPanelColor());
 }

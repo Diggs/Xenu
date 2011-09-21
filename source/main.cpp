@@ -11,6 +11,9 @@
 #include "HardwareManager.h"
 #include "GUIManager.h"
 #include "LogManager.h"
+#include <iostream>
+#include <sstream>
+#include <string>
 #include <zlx/zlx.h>
 #include <zlx/Utils.h>
 #include <zlx/Draw.h>
@@ -33,16 +36,24 @@ bool shouldQuit = false;
 static GUIManager gui;
 
 
+struct controller_data_s controller;
+
+
 struct controller_data_s updateInput()
 {
-    // Will contain current state of game pad
-    static struct controller_data_s controller;
-    
     // Poll for USB devices..
     usb_do_poll();
     
     // Update the game pad state
     get_controller_data(&controller, 0);
+    
+    /*
+    if(controller.s1_x > STICK_THRESHOLD || controller.s1_x < -STICK_THRESHOLD || controller.s1_y > STICK_THRESHOLD || controller.s1_y < -STICK_THRESHOLD) {
+        stringstream ss;
+        ss << "stick1Y " << controller.s1_y << " stick1X " << controller.s1_x << endl;
+        LogManager::Log(ss.str().c_str());
+    }
+    */
     
     // Logo quits the app...
     if(controller.logo) {
@@ -55,9 +66,9 @@ struct controller_data_s updateInput()
 
 void update()
 {
-    struct controller_data_s controller = updateInput();
+    updateInput();
 
-    gui.update(controller);
+    gui.update(&controller);
 }
 
 
@@ -73,6 +84,8 @@ void draw()
 
 int main()
 {
+    memset(&controller, 0, sizeof (struct controller_data_s));
+    
     // Initialize the Xbox 360 hardware
     HardwareManager::InitializeXbox();
     

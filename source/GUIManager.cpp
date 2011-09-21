@@ -52,6 +52,9 @@ void GUIManager::initialize()
     // Create the font
     xenuFont.Create(pFontTexture, pFontData);
     
+    // Start with no offset modifier
+    horizontalPanelOffsetModifier = 0.0f;
+    
     // Set the default view mode
     viewMode = APPLICATIONS;
     
@@ -98,14 +101,14 @@ void GUIManager::CreateApplicationPanels()
 }
 
 
-void GUIManager::UpdateViewMode(controller_data_s controller)
+void GUIManager::UpdateViewMode(controller_data_s* controller)
 {
     // If either of these are being pushed we have a keydown state
-    if(controller.rb || controller.lb) {
+    if(controller->rb || controller->lb) {
         
         isKeyDown = true;
         
-        if(controller.rb) {
+        if(controller->rb) {
             currentKeyDown = RB;
         } else {
             currentKeyDown = LB;
@@ -114,7 +117,7 @@ void GUIManager::UpdateViewMode(controller_data_s controller)
     
     // If either of the shoulder buttons are not being pushed, when they previously were
     // then we have a key up
-    if(!controller.rb && !controller.lb && isKeyDown == true)  {
+    if(!controller->rb && !controller->lb && isKeyDown == true)  {
 
         // If left shoulder button pushed move backwards through views
         if(currentKeyDown == LB) {
@@ -178,7 +181,7 @@ void GUIManager::UpdateCurrentPanels()
 }
 
 
-void GUIManager::UpdatePanels(controller_data_s controller)
+void GUIManager::UpdatePanels(controller_data_s* controller)
 {   
     const float screenHeight = 2.0f;
     const float screenWidth = 2.0f;
@@ -186,12 +189,16 @@ void GUIManager::UpdatePanels(controller_data_s controller)
     const float screenLeft = -1.0f;
     const float screenRight = 1.0f;
 
+    // Update the horizontal offset modifier based on input. TODO Clamp this value.
+    if(controller->s1_x >= STICK_THRESHOLD) {
+        horizontalPanelOffsetModifier += 0.03f;
+    } else if(controller->s1_x <= -STICK_THRESHOLD) {
+        horizontalPanelOffsetModifier -= 0.03f;
+    }
+    
     // The offset that will be applied to the x postion of each panel
     // This should not be affected by controller input.
-    float horizontalOffset = 0;
-    
-    // This offset can be modified to move all panels left or right i.e. By controller input.
-    float horizontalOffsetModifier = 0.0f;
+    float horizontalPanelOffset = 0;
     
     // The width of a panel
     float panelWidth = 0.3f;
@@ -232,9 +239,9 @@ void GUIManager::UpdatePanels(controller_data_s controller)
         // If we're on the first pass then we're dealing with a negative offset
         // All subsequent passes will be positive
         if(currentPass == 0) {
-            horizontalOffset = (screenLeft + horizontalScreenPadding) + horizontalOffsetModifier;
+            horizontalPanelOffset = (screenLeft + horizontalScreenPadding) + horizontalPanelOffsetModifier;
         } else {
-            horizontalOffset = (currentPass * (screenRight + horizontalScreenPadding)) + horizontalOffsetModifier;
+            horizontalPanelOffset = (currentPass * (screenRight + horizontalScreenPadding)) + horizontalPanelOffsetModifier;
         }
         
         for(int verticalPanel = 0; verticalPanel < verticalPanels; verticalPanel++) {
@@ -248,7 +255,7 @@ void GUIManager::UpdatePanels(controller_data_s controller)
                 GUIApplicationPanel& currentPanel = currentPanels->at(panelIndex);
                 
                 // Calculate its position
-                float panelX = horizontalOffset + (horizontalPanel * panelWidth) + (horizontalPanel * panelGap);
+                float panelX = horizontalPanelOffset + (horizontalPanel * panelWidth) + (horizontalPanel * panelGap);
                 float panelY = (screenTop - verticalScreenPadding - panelHeight) - (verticalPanel * panelHeight) - (verticalPanel * panelGap);
                 
                 // Update the panel
@@ -262,7 +269,7 @@ void GUIManager::UpdatePanels(controller_data_s controller)
 }
 
 
-void GUIManager::update(controller_data_s controller) {
+void GUIManager::update(controller_data_s* controller) {
 
     // Update system temperatures
     HardwareManager::GetSystemTemperatures(&cpuTemp, &gpuTemp, &memoryTemp, &motherboardTemp);

@@ -21,6 +21,8 @@ using namespace std;
 #ifndef GUIMANAGER_H
 #define	GUIMANAGER_H
 
+#define STICK_THRESHOLD 20000
+
 class GUIManager {
 public:
     GUIManager();
@@ -29,7 +31,7 @@ public:
     
     void initialize();
     
-    void update(controller_data_s controller);
+    void update(controller_data_s* controller);
     
     void draw();
     
@@ -39,9 +41,9 @@ private:
     
     ViewMode viewMode;
     
-    void UpdateViewMode(controller_data_s controller);
+    void UpdateViewMode(controller_data_s* controller);
     
-    void UpdatePanels(controller_data_s controller);
+    void UpdatePanels(controller_data_s* controller);
     
     void UpdateCurrentPanels();
     
@@ -70,6 +72,9 @@ private:
     float memoryTemp;
     
     float motherboardTemp;
+    
+    // This offset can be modified to move all panels left or right i.e. By controller input.
+    float horizontalPanelOffsetModifier;
     
     bool isKeyDown;
     
